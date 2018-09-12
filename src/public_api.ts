@@ -1,2 +1,2 @@
-export * from './lib/redux';
-export * from './lib/redux-http';
+export * from './lib/redux/index';
+export * from './lib/redux-http/index';
