@@ -48,26 +48,24 @@ somethingEpic = (action$, state$) =>
 ### After
 
 ```typescript
-somethingEpic: NgEpic = {
-  type: SOMETHING,
-  fn: (action: AnyAction, state$) => {
-    this.httpClient.get<any>('/something').toPromise()
-      .then(response => { type: SUCCESS, response })
-      .catch(error => { type: ERROR, response });
-  }
-};
+@NgEpic(SOMETHING)
+somethingEpic(action: AnyAction, state$) {
+  this.httpClient.get<any>('/something').toPromise()
+    .then(response => { type: SUCCESS, response })
+    .catch(error => { type: ERROR, response });
+}
 ```
 
 ### Configuring Epics in Store
 
-Configuration of the epics is nearly identical to the standard setup of Redux Observable, minus one function change (using generateEpics instead of combineEpics).
+Configuration of the epics is also simplified compared to the standard setup of Redux Observable. You call the generateEpics instead of combineEpics, and pass the services that contain @NgEpic decorators.
 
 ### Before
 
 ```typescript
 const epicMiddleware = createEpicMiddleware();
 this.ngRedux.configureStore(rootReducer, APP_INITIAL_STATE, epicMiddleware);
-epicMiddleware.run(combineEpics(epic1, epic2));
+epicMiddleware.run(combineEpics(service.epic1, service.epic2));
 ```
 
 ### After
@@ -75,7 +73,7 @@ epicMiddleware.run(combineEpics(epic1, epic2));
 ```typescript
 const epicMiddleware = createEpicMiddleware();
 this.ngRedux.configureStore(rootReducer, APP_INITIAL_STATE, epicMiddleware);
-epicMiddleware.run(generateEpics([ngEpic1, ngEpic2]));
+epicMiddleware.run(generateEpics(service));
 ```
 
 ## Redux Http Module
@@ -100,10 +98,7 @@ this.ngRedux.configureStore(
   [ ...enhancers, devTool.isEnabled() ? devTool.enhancer() : f => f]);
 
 epicMiddleware.run(
-  generateEpics([
-    reduxHttpService.reduxGet,
-    reduxHttpService.reduxPost
-  ])
+  generateEpics(reduxHttpService)
 );
 ```
 
@@ -143,7 +138,7 @@ export class ReduxPostPayload {
 ```typescript
 getData(): void {
   const payload: ReduxGetPayload = {
-    url: '/assets/data.json',
+    url: 'assets/data.json',
     successAction: ExampleReduxActions.GET_DATA_SUCCESS
   };
 
