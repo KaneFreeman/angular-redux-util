@@ -1,7 +1,7 @@
 # angular-redux-util
 [![npm version](https://badge.fury.io/js/angular-redux-util.svg)](https://badge.fury.io/js/angular-redux-util)
 
-Angular Redux Util is a helper library for using Angular 6+ applications with [Redux](https://redux.js.org/) (via [NgRedux](https://angular-redux.github.io/store/index.html)) and [Redux Observable](https://redux-observable.js.org/). It contains a simplified Epic setup and built in generic Get and Post epics.
+Angular Redux Util is a helper library for using Angular 6+ applications with [Redux](https://redux.js.org/) (via [@angular-redux/](https://angular-redux.github.io/store/index.html)) and [Redux Observable](https://redux-observable.js.org/). It contains a simplified Epic setup and built in generic Get and Post epics.
 
 ## Table of Contents
 
@@ -26,7 +26,7 @@ Angular Redux Util is a helper library for using Angular 6+ applications with [R
 |Angular|^6.0.0|
 |Redux|^4.0.0|
 |Redux Observable|^1.0.0|
-|NgRedux|^9.0.0|
+|@angular-redux|^9.0.0|
 
 ## Defining Redux Observable Epics
 
@@ -87,7 +87,7 @@ To get started, we need to setup the Get and Post epics into the store:
 ```typescript
 const epicMiddleware = createEpicMiddleware();
 
-// Configure NgRedux
+// Configure @angular-redux
 this.ngRedux.configureStore(
   rootReducer,
   APP_INITIAL_STATE,
