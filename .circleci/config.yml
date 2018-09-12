@@ -11,7 +11,7 @@ deps_cache: &deps_cache
 
 version: 2
 jobs:
-  build:
+  checkout_code:
     <<: *defaults
     steps:
       - checkout
