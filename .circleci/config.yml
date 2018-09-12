@@ -93,3 +93,8 @@ workflows:
       - build:
           requires:
             - install_dependencies
+      - deploy:
+          requires:
+            - lint
+            - test
+            - build
