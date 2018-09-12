@@ -58,6 +58,24 @@ jobs:
       - restore_cache: *deps_cache
       - run: yarn build
 
+  deploy:
+    <<: *defaults
+    filters:
+      tags:
+        only: /.*/
+      branches:
+        only: master
+    steps:
+      - restore_cache: *repo_cache
+      - restore_cache: *deps_cache
+      - run: yarn package
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/repo/.npmrc
+      - run:
+          name: Publish package
+          command: npm publish
+
 workflows:
   version: 2
   build:
