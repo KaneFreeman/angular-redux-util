@@ -1,7 +1,7 @@
 # angular-redux-util
 [![npm version](https://badge.fury.io/js/angular-redux-util.svg)](https://badge.fury.io/js/angular-redux-util) [![CircleCI](https://circleci.com/gh/KaneFreeman/angular-redux-util.svg?style=shield)](https://circleci.com/gh/KaneFreeman/angular-redux-util)
 
-Angular Redux Util is a helper library for using Angular 6+ applications with [Redux](https://redux.js.org/) (via [@angular-redux](https://angular-redux.github.io/store/index.html)) and [Redux Observable](https://redux-observable.js.org/). It contains a simplified Epic setup and built in generic Get and Post epics.
+Angular Redux Util is a helper library for using Angular 6+ applications with [Redux](https://redux.js.org/) (meant for use with [@angular-redux](https://angular-redux.github.io/store/index.html)) and [Redux Observable](https://redux-observable.js.org/). It contains a simplified Epic setup and built in generic Get and Post epics.
 
 ## Table of Contents
 
@@ -19,14 +19,17 @@ Angular Redux Util is a helper library for using Angular 6+ applications with [R
     * [Post Action](#post-action)
     * [Example](#example)
 
-## Requirements
+## Peer Dependencies
 
 |Module|Version|
 |---|---|
-|Angular|^6.0.0|
-|Redux|^4.0.0|
-|Redux Observable|^1.0.0|
-|@angular-redux|^9.0.0|
+|@angular/common|^6.0.0-rc.0 || ^6.0.0"|
+|@angular/core|^6.0.0-rc.0 || ^6.0.0"|
+|redux|^4.0.0"|
+|redux-observable|^1.0.0"|
+|rxjs|^6.0.0"|
+
+Meant for use with [@angular-redux](https://angular-redux.github.io/store/index.html) ^9.0.0.
 
 ## Defining Redux Observable Epics
 

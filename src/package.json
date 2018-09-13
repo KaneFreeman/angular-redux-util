@@ -1,6 +1,6 @@
 {
   "name": "angular-redux-util",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "license": "MIT",
   "description": "Angular Redux Util is a helper library for using Angular 6+ applications with Redux (via NgRedux) and Redux Observable.",
   "repository": {
@@ -8,11 +8,15 @@
     "url": "https://github.com/KaneFreeman/angular-redux-util"
   },
   "homepage": "https://kanefreeman.github.io/angular-redux-util/",
+  "bugs": {
+    "url": "https://github.com/kanefreeman/angular-redux-util/issues"
+  },
   "keywords" :["Angular","Redux"],
   "peerDependencies": {
     "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
     "@angular/core": "^6.0.0-rc.0 || ^6.0.0",
     "redux": "^4.0.0",
-    "redux-observable": "^1.0.0"
+    "redux-observable": "^1.0.0",
+    "rxjs": "^6.0.0"
   }
 }
