@@ -7,6 +7,7 @@ import {
 } from './model';
 
 import { NgEpic } from '../redux';
+import { Observable } from 'rxjs';
 
 export type REDUX_GET = 'REDUX_GET';
 export type REDUX_POST = 'REDUX_POST';
@@ -26,49 +27,41 @@ export const GENERIC_ERROR = 'GENERIC_ERROR';
 export class ReduxHttpService {
   @NgEpic(REDUX_GET)
   get(action: ReduxGetAction) {
-    action.options.headers = this.buildHeader(action.options.headers);
+    action.options = this.buildOptions(action.options);
 
-    return this.httpClient.get<any>(action.url, action.options)
-      .toPromise()
-      .then(response => this.fnThen(response, action.payload))
-      .catch(error => this.fnCatch(error, action.payload));
+    return this.handleResponse(this.httpClient.get<any>(action.url, action.options), action);
   }
 
   @NgEpic(REDUX_POST)
   post(action: ReduxPostAction) {
-    action.options.headers = this.buildHeader(action.options.headers);
+    action.options = this.buildOptions(action.options);
 
-    return this.httpClient.post<any>(action.url, action.body, action.options)
-      .toPromise()
-      .then(response => this.fnThen(response, action.payload))
-      .catch(error => this.fnCatch(error, action.payload));
+    return this.handleResponse(this.httpClient.post<any>(action.url, action.body, action.options), action);
   }
 
   @NgEpic(REDUX_POST)
   put(action: ReduxPutAction) {
-    action.options.headers = this.buildHeader(action.options.headers);
+    action.options = this.buildOptions(action.options);
 
-    return this.httpClient.put<any>(action.url, action.body, action.options)
-      .toPromise()
-      .then(response => this.fnThen(response, action.payload))
-      .catch(error => this.fnCatch(error, action.payload));
+    return this.handleResponse(this.httpClient.put<any>(action.url, action.body, action.options), action);
   }
 
   @NgEpic(REDUX_POST)
   patch(action: ReduxPatchAction) {
-    action.options.headers = this.buildHeader(action.options.headers);
+    action.options = this.buildOptions(action.options);
 
-    return this.httpClient.patch<any>(action.url, action.body, action.options)
-      .toPromise()
-      .then(response => this.fnThen(response, action.payload))
-      .catch(error => this.fnCatch(error, action.payload));
+    return this.handleResponse(this.httpClient.patch<any>(action.url, action.body, action.options), action);
   }
 
   @NgEpic(REDUX_POST)
   delete(action: ReduxDeleteAction) {
-    action.options.headers = this.buildHeader(action.options.headers);
+    action.options = this.buildOptions(action.options);
 
-    return this.httpClient.delete<any>(action.url, action.options)
+    return this.handleResponse(this.httpClient.delete<any>(action.url, action.options), action);
+  }
+
+  private handleResponse(obs: Observable<any>, action: ReduxHttpAction): Promise<ReduxHttpSuccessAction | ReduxHttpErrorAction> {
+    return obs
       .toPromise()
       .then(response => this.fnThen(response, action.payload))
       .catch(error => this.fnCatch(error, action.payload));
