@@ -6,5 +6,5 @@ export class ReduxHttpAction {
   errorAction?: string;
   payload?: any;
 
-  options: ReduxHttpOptions;
+  options?: ReduxHttpOptions;
 }

@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import {
   ReduxHttpAction, ReduxGetAction, ReduxPostAction, ReduxPutAction, ReduxPatchAction, ReduxDeleteAction,
-  ReduxHttpSuccessAction, ReduxHttpErrorAction
+  ReduxHttpSuccessAction, ReduxHttpErrorAction, ReduxHttpOptions
 } from './model';
 
 import { NgEpic } from '../redux';
@@ -86,7 +86,17 @@ export class ReduxHttpService {
     };
   }
 
-  private buildHeader(headers: HttpHeaders| { [key: string]: string | string[] }): HttpHeaders {
+  private buildOptions(options: ReduxHttpOptions|undefined): ReduxHttpOptions {
+    if (options === undefined) {
+      options = new ReduxHttpOptions();
+    }
+
+    options.headers = this.buildHeader(options.headers);
+
+    return options;
+  }
+
+  private buildHeader(headers: HttpHeaders|{ [key: string]: string | string[] }): HttpHeaders {
     if (!(headers instanceof HttpHeaders)) {
       headers = new HttpHeaders(headers);
     }
