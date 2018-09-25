@@ -106,46 +106,67 @@ epicMiddleware.run(
 );
 ```
 
+### Actions
+
+#### Base Http Action
+```typescript
+export class ReduxHttpAction {
+  url: string;
+  successAction: string;
+  errorAction?: string;
+  payload?: any;
+
+  options?: ReduxHttpOptions;
+}
+```
+
+#### Options
+```typescript
+export class ReduxHttpOptions {
+  headers?: HttpHeaders | {[header: string]: string | string[]};
+  reportProgress?: boolean;
+  responseType?: 'json';
+  withCredentials?: boolean;
+}
+```
+
+#### Http Action With Body
+```typescript
+export class ReduxHttpBodyAction extends ReduxHttpAction {
+  body: any|null;
+}
+```
+
 ### Get Action
+* **Type**: `REDUX_GET`
+* **Action Format**: `ReduxHttpAction`
 
-**Type**: `REDUX_GET`
-
-**Action Format**:
-
-```typescript
-export class ReduxGetPayload {
-  url: string;
-  successAction: string;
-  errorAction?: string;
-  headers?: { [key: string]: string | string[] };
-}
-```
-
-### Post Action
-
-**Type**: `REDUX_GET`
-
-**Action Format**:
-
-```typescript
-export class ReduxPostPayload {
-  url: string;
-  data: any;
-  successAction: string;
-  errorAction?: string;
-  headers?: { [key: string]: string | string[] };
-}
-```
-
-### Example
+#### Example
 
 ```typescript
 getData(): void {
-  const payload: ReduxGetPayload = {
+  const action: ReduxGetAction = {
+    type: REDUX_GET
     url: 'assets/data.json',
     successAction: ExampleReduxActions.GET_DATA_SUCCESS
   };
 
-  this.ngRedux.dispatch(createAction(REDUX_GET, payload));
+  this.ngRedux.dispatch(action);
 }
 ```
+
+### Post Action
+* **Type**: `REDUX_GET`
+* **Action Format**: `ReduxHttpBodyAction`
+
+### Patch Action
+* **Type**: `REDUX_PATCH`
+* **Action Format**: `ReduxHttpBodyAction`
+
+### Put Action
+* **Type**: `REDUX_PUT`
+* **Action Format**: `ReduxHttpBodyAction`
+
+### Post Action
+* **Type**: `REDUX_DELETE`
+* **Action Format**: `ReduxHttpAction`
