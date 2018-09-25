@@ -27,6 +27,7 @@ Angular Redux Util is a helper library for using Angular 6+ applications with [R
 |@angular/core|^6.0.0-rc.0 || ^6.0.0"|
 |redux|^4.0.0"|
 |redux-observable|^1.0.0"|
+|redux-observable-util|^0.1.0"|
 |rxjs|^6.0.0"|
 
 Meant for use with [@angular-redux](https://angular-redux.github.io/store/index.html) ^9.0.0.
@@ -51,7 +52,7 @@ somethingEpic = (action$, state$) =>
 ### After
 
 ```typescript
-@NgEpic(SOMETHING)
+@Epic(SOMETHING)
 somethingEpic(action: AnyAction, state$) {
   this.httpClient.get<any>('/something').toPromise()
     .then(response => { type: SUCCESS, response })
@@ -61,7 +62,7 @@ somethingEpic(action: AnyAction, state$) {
 
 ### Configuring Epics in Store
 
-Configuration of the epics is also simplified compared to the standard setup of Redux Observable. You call the generateEpics instead of combineEpics, and pass the services that contain @NgEpic decorators.
+Configuration of the epics is also simplified compared to the standard setup of Redux Observable. You call the generateEpics instead of combineEpics, and pass the services that contain @Epic decorators.
 
 ### Before
 

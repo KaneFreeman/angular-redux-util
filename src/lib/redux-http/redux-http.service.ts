@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Epic } from 'redux-observable-util';
+import { Observable } from 'rxjs';
 
 import {
   ReduxHttpAction, ReduxGetAction, ReduxPostAction, ReduxPutAction, ReduxPatchAction, ReduxDeleteAction,
   ReduxHttpSuccessAction, ReduxHttpErrorAction, ReduxHttpOptions
 } from './model';
-
-import { NgEpic } from '../redux';
-import { Observable } from 'rxjs';
 
 export type REDUX_GET = 'REDUX_GET';
 export type REDUX_POST = 'REDUX_POST';
@@ -25,35 +24,35 @@ export const GENERIC_ERROR = 'GENERIC_ERROR';
 
 @Injectable()
 export class ReduxHttpService {
-  @NgEpic(REDUX_GET)
+  @Epic(REDUX_GET)
   get(action: ReduxGetAction) {
     action.options = this.buildOptions(action.options);
 
     return this.handleResponse(this.httpClient.get<any>(action.url, action.options), action);
   }
 
-  @NgEpic(REDUX_POST)
+  @Epic(REDUX_POST)
   post(action: ReduxPostAction) {
     action.options = this.buildOptions(action.options);
 
     return this.handleResponse(this.httpClient.post<any>(action.url, action.body, action.options), action);
   }
 
-  @NgEpic(REDUX_POST)
+  @Epic(REDUX_POST)
   put(action: ReduxPutAction) {
     action.options = this.buildOptions(action.options);
 
     return this.handleResponse(this.httpClient.put<any>(action.url, action.body, action.options), action);
   }
 
-  @NgEpic(REDUX_POST)
+  @Epic(REDUX_POST)
   patch(action: ReduxPatchAction) {
     action.options = this.buildOptions(action.options);
 
     return this.handleResponse(this.httpClient.patch<any>(action.url, action.body, action.options), action);
   }
 
-  @NgEpic(REDUX_POST)
+  @Epic(REDUX_POST)
   delete(action: ReduxDeleteAction) {
     action.options = this.buildOptions(action.options);
 
@@ -63,8 +62,8 @@ export class ReduxHttpService {
   private handleResponse(obs: Observable<any>, action: ReduxHttpAction): Promise<ReduxHttpSuccessAction | ReduxHttpErrorAction> {
     return obs
       .toPromise()
-      .then(response => this.fnThen(response, action.payload))
-      .catch(error => this.fnCatch(error, action.payload));
+      .then(response => this.fnThen(response, action))
+      .catch(error => this.fnCatch(error, action));
   }
 
   private fnThen(response: any, action: ReduxHttpAction): ReduxHttpSuccessAction {
