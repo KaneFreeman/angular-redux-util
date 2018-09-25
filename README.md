@@ -23,12 +23,12 @@ Angular Redux Util is a helper library for using Angular 6+ applications with [R
 
 |Module|Version|
 |---|---|
-|@angular/common|^6.0.0-rc.0 || ^6.0.0"|
-|@angular/core|^6.0.0-rc.0 || ^6.0.0"|
-|redux|^4.0.0"|
-|redux-observable|^1.0.0"|
-|redux-observable-util|^0.1.0"|
-|rxjs|^6.0.0"|
+|@angular/common|^6.0.0|
+|@angular/core|^6.0.0|
+|redux|^4.0.0|
+|redux-observable|^1.0.0|
+|redux-observable-util|^0.1.0|
+|rxjs|^6.0.0|
 
 Meant for use with [@angular-redux](https://angular-redux.github.io/store/index.html) ^9.0.0.
 
