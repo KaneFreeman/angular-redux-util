@@ -156,7 +156,7 @@ getData(): void {
 ```
 
 ### Post Action
-* **Type**: `REDUX_GET`
+* **Type**: `REDUX_POST`
 * **Action Format**: `ReduxHttpBodyAction`
 
 ### Patch Action
@@ -167,6 +167,6 @@ getData(): void {
 * **Type**: `REDUX_PUT`
 * **Action Format**: `ReduxHttpBodyAction`
 
-### Post Action
+### Delete Action
 * **Type**: `REDUX_DELETE`
 * **Action Format**: `ReduxHttpAction`
