@@ -10,15 +10,15 @@ import {
 
 export type REDUX_GET = 'REDUX_GET';
 export type REDUX_POST = 'REDUX_POST';
+export type REDUX_PUT = 'REDUX_PUT';
 export type REDUX_PATCH = 'REDUX_PATCH';
 export type REDUX_DELETE = 'REDUX_DELETE';
-export type REDUX_PUT = 'REDUX_PUT';
 
 export const REDUX_GET: REDUX_GET = 'REDUX_GET';
 export const REDUX_POST: REDUX_POST = 'REDUX_POST';
+export const REDUX_PUT: REDUX_PUT = 'REDUX_PUT';
 export const REDUX_PATCH: REDUX_PATCH = 'REDUX_PATCH';
 export const REDUX_DELETE: REDUX_DELETE = 'REDUX_DELETE';
-export const REDUX_PUT: REDUX_PUT = 'REDUX_PUT';
 
 export const GENERIC_ERROR = 'GENERIC_ERROR';
 
@@ -38,21 +38,21 @@ export class ReduxHttpService {
     return this.handleResponse(this.httpClient.post<any>(action.url, action.body, action.options), action);
   }
 
-  @Epic(REDUX_POST)
+  @Epic(REDUX_PUT)
   put(action: ReduxPutAction) {
     action.options = this.buildOptions(action.options);
 
     return this.handleResponse(this.httpClient.put<any>(action.url, action.body, action.options), action);
   }
 
-  @Epic(REDUX_POST)
+  @Epic(REDUX_PATCH)
   patch(action: ReduxPatchAction) {
     action.options = this.buildOptions(action.options);
 
     return this.handleResponse(this.httpClient.patch<any>(action.url, action.body, action.options), action);
   }
 
-  @Epic(REDUX_POST)
+  @Epic(REDUX_DELETE)
   delete(action: ReduxDeleteAction) {
     action.options = this.buildOptions(action.options);
 
